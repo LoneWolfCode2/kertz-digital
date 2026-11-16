@@ -30,6 +30,6 @@ export function calcLeak({
 
 export const usd = new Intl.NumberFormat("en-US", {
   style: "currency",
-  currency: "usd",
+  currency: "USD",
   maximumFractionDigits: 0,
 });

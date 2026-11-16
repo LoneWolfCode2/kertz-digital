@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kertz Digital
 
-## Getting Started
+Marketing site for Kertz Digital: websites and lead systems for Austin home
+service companies.
 
-First, run the development server:
+Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS v4 · Motion ·
+Biome.
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run lint     # Biome lint + format check
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| Business details (name, phone, service area, hours, CTA) | `src/content/site.ts` |
+| Services, industries, pricing plans | `src/content/*.ts` |
+| Pages | `src/app/**/page.tsx` |
+| SEO helpers (metadata, structured data) | `src/lib/seo.ts`, `src/lib/schema.ts` |
+| Site URL + indexing switch | `src/lib/env.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Placeholders are written as `[LIKE THIS]`; search for `[` to find them.
 
-## Learn More
+## Deploying to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Push this repo to GitHub.
+2. In Vercel: **Add New → Project → Import** the repo. Framework is detected
+   as Next.js; keep the default build settings.
+3. Deploy. The site goes live at `https://<project>.vercel.app`. Every push to
+   `main` redeploys production; other branches get preview URLs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+No environment variables are needed for a first deploy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Search indexing is off by default
 
-## Deploy on Vercel
+Test deployments send `noindex` and a blocking `robots.txt`, so placeholder
+content never reaches Google. When the real domain and details are live, set
+these on the **Production** environment and redeploy:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | `https://kertzdigital.com` |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | `true` |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Preview deployments are never indexed. See `.env.example`.
+
+### Attaching the real domain
+
+Vercel → Project → **Settings → Domains** → add `kertzdigital.com` and
+`www.kertzdigital.com`, then follow the DNS instructions shown. Pick one as
+primary and let Vercel redirect the other.

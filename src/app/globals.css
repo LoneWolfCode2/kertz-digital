@@ -262,7 +262,8 @@
   }
 }
 
-/* ───────── 7. Reduced motion safety net ───────── */
+/* ───────── 7. Reduced motion safety net ─────────
+   !important is deliberate: it must beat any component-level animation. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

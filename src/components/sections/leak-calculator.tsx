@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
-import { SpecCard } from "../spec-card";
-import { buttonVariants } from "../ui/button";
+import { AnimatedNumber } from "@/components/motion/animated-number";
 import {
   calcLeak,
   DEFAULT_INPUTS,
@@ -11,6 +10,8 @@ import {
   usd,
 } from "@/lib/calculator";
 import { cn } from "@/lib/utils";
+import { SpecCard } from "../spec-card";
+import { buttonVariants } from "../ui/button";
 
 type FieldProps = {
   label: string;
@@ -34,6 +35,17 @@ function Field({
   suffix,
 }: FieldProps) {
   const id = useId();
+  // What the user is typing. Lets the box sit empty or mid-edit without
+  // forcing the value to 0; null means "show the committed value".
+  const [draft, setDraft] = useState<string | null>(null);
+  const clamp = (n: number) => Math.min(max, Math.max(min, n));
+  const commit = () => {
+    if (draft !== null) {
+      const n = Number(draft);
+      if (draft.trim() !== "" && Number.isFinite(n)) onChange(clamp(n));
+      setDraft(null);
+    }
+  };
   const fill = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
 
   return (
@@ -52,15 +64,28 @@ function Field({
             type="number"
             inputMode="numeric"
             aria-label={`${label}, exact value`}
-            value={value}
+            value={draft ?? value}
             min={min}
             max={max}
             step={step}
             onChange={(e) => {
-              const n = Number(e.target.value);
-              if (!Number.isNaN(n)) onChange(n);
+              const raw = e.target.value;
+              setDraft(raw);
+              const n = Number(raw);
+              // Live-update results only while the typed value is in range.
+              if (
+                raw.trim() !== "" &&
+                Number.isFinite(n) &&
+                n >= min &&
+                n <= max
+              )
+                onChange(n);
             }}
-            onBlur={() => onChange(Math.min(max, Math.max(min, value)))}
+            onBlur={commit}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") commit();
+              if (e.key === "Escape") setDraft(null);
+            }}
             className="w-20 border-b border-input bg-transparent text-right outline-none [appearance:textfield] focus-visible:border-foreground [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           />
           {suffix && (
@@ -170,9 +195,11 @@ export function LeakCalculator() {
           Estimated lost revenue / year
         </p>
         <output className="mt-2 block font-mono text-2xl tabular-nums">
-          <span className="bg-caution px-1.5 text-caution-foreground">
-            {usd.format(r.lostPerYear)}
-          </span>
+          <AnimatedNumber
+            value={r.lostPerYear}
+            format={(n) => usd.format(n)}
+            className="bg-caution px-1.5 text-caution-foreground"
+          />
         </output>
       </div>
 
