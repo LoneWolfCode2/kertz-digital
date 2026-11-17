@@ -43,6 +43,10 @@ const bookingSchema = z.object({
   business: z.string().trim().max(120).optional().default(""),
   trade: z.string().trim().min(1, "Pick the closest match.").max(60),
   notes: z.string().trim().max(1000).optional().default(""),
+  smsConsent: z
+    .enum(["yes"])
+    .optional()
+    .transform((v) => v === "yes"),
 });
 
 export type ScheduleFormState = {

@@ -42,3 +42,4 @@ yarn-error.log*
 next-env.d.ts
 kertz-digital-seo.patch
 kertz-digital-scheduler.patch
+kertz-digital-sms-phone.patch

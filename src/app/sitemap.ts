@@ -6,6 +6,8 @@ import { absoluteUrl } from "@/lib/seo";
 // Add new public routes here so search engines can find them.
 const routes: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
+  { path: "/privacy", priority: 0.2 },
+  { path: "/sms-terms", priority: 0.2 },
   { path: "/services", priority: 0.9 },
   ...services.map((s) => ({ path: s.href, priority: 0.9 })),
   { path: "/pricing", priority: 0.8 },

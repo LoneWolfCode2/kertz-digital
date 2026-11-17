@@ -77,9 +77,22 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <p className="container-kd label-mono py-5 text-muted-foreground">
-          © {site.name} · {site.location}
-        </p>
+        <div className="container-kd flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-5">
+          <p className="label-mono text-muted-foreground">
+            © {site.name} · {site.location}
+          </p>
+          <nav
+            aria-label="Legal"
+            className="flex gap-5 text-sm text-muted-foreground"
+          >
+            <Link href="/privacy" className="hover:underline">
+              Privacy
+            </Link>
+            <Link href="/sms-terms" className="hover:underline">
+              SMS terms
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   );

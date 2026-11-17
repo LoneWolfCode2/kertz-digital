@@ -57,6 +57,11 @@ export const leadSchema = z.object({
   message: z.string().trim().max(2000).optional().default(""),
   /** Annual estimate carried over from the missed-lead calculator. */
   estimate: z.string().trim().max(40).optional().default(""),
+  /** Optional SMS opt-in checkbox ("yes" when checked). */
+  smsConsent: z
+    .enum(["yes"])
+    .optional()
+    .transform((v) => v === "yes"),
   /** Page the visitor came from, for attribution. */
   source: z.string().trim().max(200).optional().default(""),
 });
@@ -103,6 +108,7 @@ function emailBody(e: LeadEnvelope) {
     ["Calculator estimate", l.estimate],
     ["Came from", l.source],
     ["Message", l.message],
+    ["OK to text", l.smsConsent ? "Yes" : "No"],
   ].filter(([, v]) => v) as [string, string][];
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
   const html = `<table cellpadding="6" style="font-family:sans-serif;font-size:14px">${rows

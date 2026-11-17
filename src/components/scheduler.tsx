@@ -13,6 +13,7 @@ import {
   type ScheduleFormState,
 } from "@/app/book/schedule-actions";
 import { control, Field, TRADES } from "@/components/booking-form";
+import { SmsConsent } from "@/components/sms-consent";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
 import type { OpenDay } from "@/lib/scheduler";
@@ -337,6 +338,8 @@ export function Scheduler({ tzLabel }: { tzLabel: string }) {
               />
             )}
           </Field>
+
+          <SmsConsent defaultChecked={v.smsConsent === "yes"} />
 
           {/* Honeypot + timing, same as the request form */}
           <div

@@ -31,12 +31,24 @@ export const site = {
     "Georgetown",
     "Leander",
   ],
-  /** Public Google Voice number. Email is never shown; forms send server-side. */
+  /**
+   * Public business line (Twilio). Calls ring Joseph's cell and fall back to
+   * voicemail; texts go to the communications bot. Email is never shown;
+   * forms send server-side.
+   */
   phone: {
-    display: "(512) 555-0142",
-    href: "tel:+15125550142",
-    e164: "+15125550142",
-    placeholder: true, // [GOOGLE VOICE NUMBER NEEDED]
+    display: "(737) 340-5725",
+    href: "tel:+17373405725",
+    sms: "sms:+17373405725",
+    e164: "+17373405725",
+    placeholder: false,
+  },
+  /** Legal pages carriers check during SMS (A2P 10DLC) review. */
+  legal: {
+    owner: "Joseph Kertz",
+    entity: "Kertz Digital, a sole proprietorship of Joseph Kertz",
+    updated: "November 17, 2026",
+    smsProgram: "Kertz Digital Customer Care",
   },
   hours: {
     display: "Mon–Fri, 8am–6pm",

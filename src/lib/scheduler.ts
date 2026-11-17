@@ -150,6 +150,7 @@ export type BookingInput = {
   business: string;
   trade: string;
   notes: string;
+  smsConsent: boolean;
 };
 
 export type BookingResult =
@@ -180,6 +181,11 @@ export async function bookAppointment(
       language: "english",
       customField1: input.business,
       customField2: input.trade,
+      // Read by the comms bot. Only "yes" is ever written, with the date, as
+      // a record of consent; a later booking without the box never erases it.
+      ...(input.smsConsent && {
+        customField3: `SMS consent: yes (kertzdigital.com booking form, ${new Date().toISOString().slice(0, 10)})`,
+      }),
     };
     const existing = matches.find((m) => m.email?.toLowerCase() === email);
     const customer = existing

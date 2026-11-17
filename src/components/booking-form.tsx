@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useId, useState } from "react";
 import { type LeadFormState, submitLead } from "@/app/book/actions";
+import { SmsConsent } from "@/components/sms-consent";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
 import { track } from "@/lib/track";
@@ -232,6 +233,8 @@ export function BookingForm() {
           />
         )}
       </Field>
+
+      <SmsConsent defaultChecked={v.smsConsent === "yes"} />
 
       {/* Honeypot: hidden from people and screen readers; bots fill it in. */}
       <div
