@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BookedSummary } from "@/components/booked-summary";
 import { LeadCreated } from "@/components/lead-created";
 import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -22,10 +23,11 @@ export default function ThanksPage() {
       <LeadCreated />
       <PageHeader
         eyebrow="Request received"
-        title="Got it. We'll be in touch within one business day."
-        lead="Usually much sooner. If it's urgent, call us and we'll pick up or call you right back."
+        title="You're all set."
+        lead="Booked a time? Your confirmation email is on its way, with a link to reschedule. Asked us to call? We'll reach out within one business day, usually sooner."
       >
-        <div className="flex flex-wrap gap-3">
+        <BookedSummary />
+        <div className="mt-8 flex flex-wrap gap-3">
           <a
             href={site.phone.href}
             className={cn(buttonVariants({ variant: "outline" }), "font-mono")}

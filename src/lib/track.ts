@@ -10,7 +10,10 @@ export type ConversionEvent =
   | "lead_form_submit"
   | "lead_form_error"
   | "lead_created"
-  | "calculator_used";
+  | "calculator_used"
+  | "schedule_submit"
+  | "schedule_error"
+  | "appointment_booked";
 
 type Props = Record<string, string | number | boolean | null>;
 

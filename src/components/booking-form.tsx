@@ -8,7 +8,7 @@ import { track } from "@/lib/track";
 import { cn } from "@/lib/utils";
 
 // Kept in sync with TRADES / INTERESTS in lib/leads.ts (server-only file).
-const TRADES = [
+export const TRADES = [
   "HVAC",
   "Plumbing",
   "Electrical",
@@ -24,10 +24,10 @@ const INTERESTS = [
   "Not sure yet",
 ];
 
-const control =
+export const control =
   "w-full rounded-none border border-input bg-background px-3 text-base outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-foreground focus-visible:ring-2 focus-visible:ring-ring/40 aria-invalid:border-destructive";
 
-function Field({
+export function Field({
   label,
   name,
   error,

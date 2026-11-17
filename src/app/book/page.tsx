@@ -1,9 +1,11 @@
 import { BookingForm } from "@/components/booking-form";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
+import { Scheduler } from "@/components/scheduler";
 import { SpecCard } from "@/components/spec-card";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
+import { SCHEDULER_TZ_LABEL, schedulerEnabled } from "@/lib/scheduler";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -30,7 +32,11 @@ export default function BookPage() {
       <PageHeader
         eyebrow="Book a call"
         title="20 minutes. No pitch deck."
-        lead="Tell us a bit about your business and we will find a time that works. Prefer to talk now? Just call."
+        lead={
+          schedulerEnabled
+            ? "Pick a time that works and you'll get a confirmation right away. Prefer to talk now? Just call."
+            : "Tell us a bit about your business and we will find a time that works. Prefer to talk now? Just call."
+        }
       />
 
       <section className="container-kd section-y grid gap-12 lg:grid-cols-12">
@@ -57,13 +63,25 @@ export default function BookPage() {
           </a>
         </div>
 
-        <SpecCard
-          label="Booking request"
-          meta="Takes 1 minute"
-          className="lg:col-span-7"
-        >
-          <BookingForm />
-        </SpecCard>
+        <div className="min-w-0 space-y-10 lg:col-span-7">
+          {schedulerEnabled && (
+            <SpecCard label="Book your call" meta="Instant confirmation">
+              <Scheduler tzLabel={SCHEDULER_TZ_LABEL} />
+            </SpecCard>
+          )}
+          <SpecCard
+            label={schedulerEnabled ? "Or have us call you" : "Booking request"}
+            meta="Takes 1 minute"
+          >
+            {schedulerEnabled && (
+              <p className="mb-6 text-sm text-muted-foreground text-pretty">
+                None of those times work? Leave your details and we&apos;ll find
+                one.
+              </p>
+            )}
+            <BookingForm />
+          </SpecCard>
+        </div>
       </section>
     </main>
   );
