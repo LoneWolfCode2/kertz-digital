@@ -47,9 +47,16 @@ export default function PrivacyPage() {
                 which is recorded and transcribed so we can respond.
               </li>
               <li>
-                <strong>Site usage:</strong> anonymous, aggregated analytics
-                (pages viewed, device type, and clicks on call and booking
-                buttons). We don&apos;t use advertising trackers.
+                <strong>Site usage:</strong> analytics about how the site is
+                used (pages viewed, device type, approximate location, and
+                clicks on call and booking buttons), through Vercel Analytics
+                and Google Analytics. Google Analytics uses cookies; you can
+                block them in your browser or with Google&apos;s{" "}
+                <a href="https://tools.google.com/dlpage/gaoptout">
+                  opt-out add-on
+                </a>
+                . We don&apos;t sell this data or use it to build advertising
+                profiles.
               </li>
             </ul>
           ),
@@ -100,7 +107,8 @@ export default function PrivacyPage() {
                 only so they can do that job:
               </p>
               <ul>
-                <li>Vercel (website hosting and anonymous analytics)</li>
+                <li>Vercel (website hosting and analytics)</li>
+                <li>Google Analytics (website usage statistics)</li>
                 <li>Google Cloud (hosts our booking calendar and records)</li>
                 <li>Twilio (business phone line, voicemail, and texts)</li>
                 <li>Google (email for confirmations and our own inbox)</li>
