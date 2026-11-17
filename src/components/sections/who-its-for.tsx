@@ -36,16 +36,23 @@ export function WhoItsFor() {
         >
           {industries.map((industry, i) => (
             <RevealItem
-              key={industry.label}
-              className="border-r border-b border-border p-6"
+              key={industry.slug}
+              className="border-r border-b border-border"
             >
-              <p className="label-mono text-muted-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <p className="font-display text-lg mt-2">{industry.label}</p>
-              <p className="text-sm text-muted-foreground mt-2 text-pretty">
-                {industry.note}
-              </p>
+              <Link
+                href={`/industries/${industry.slug}`}
+                className="group block h-full p-6 transition-colors hover:bg-card"
+              >
+                <p className="label-mono text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-display text-lg mt-2 group-hover:underline underline-offset-4">
+                  {industry.label} →
+                </h3>
+                <p className="text-sm text-muted-foreground mt-2 text-pretty">
+                  {industry.note}
+                </p>
+              </Link>
             </RevealItem>
           ))}
         </RevealGroup>

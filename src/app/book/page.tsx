@@ -1,3 +1,4 @@
+import { BookingForm } from "@/components/booking-form";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
 import { SpecCard } from "@/components/spec-card";
@@ -8,9 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Book a call",
+  title: "Book a Free Lead Audit Call",
   description:
-    "Book a free 20-minute call to find out where your business is losing leads.",
+    "Book a free 20-minute call with Kertz Digital. We'll show your Austin home service business where calls and leads are slipping, and what to fix first.",
   path: "/book",
 });
 
@@ -56,22 +57,12 @@ export default function BookPage() {
           </a>
         </div>
 
-        {/* TODO: booking form (react-hook-form + zod) or scheduler embed */}
         <SpecCard
           label="Booking request"
-          meta="Coming soon"
+          meta="Takes 1 minute"
           className="lg:col-span-7"
         >
-          <p className="text-muted-foreground text-pretty">
-            Online booking is on its way. In the meantime, call{" "}
-            <a
-              href={site.phone.href}
-              className="font-mono text-foreground underline underline-offset-4"
-            >
-              {site.phone.display}
-            </a>{" "}
-            and we will set up a time.
-          </p>
+          <BookingForm />
         </SpecCard>
       </section>
     </main>

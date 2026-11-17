@@ -5,7 +5,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "About",
+  title: "About Kertz Digital, an Austin Web Studio",
   description:
     "Kertz Digital is an Austin studio building websites and lead systems for home service companies.",
   path: "/about",

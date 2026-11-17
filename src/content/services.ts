@@ -14,6 +14,11 @@ export type Service = {
   intro: string;
   includes: string[];
   outcome: string;
+  /** <title> without the brand suffix. Aim for ≤ 50 characters. */
+  seoTitle: string;
+  /** Meta description, ≤ 155 characters. */
+  seoDescription: string;
+  faqs: { question: string; answer: string }[];
 };
 
 export const services = [
@@ -33,6 +38,26 @@ export const services = [
       "Consistent name, address, and phone across directories",
     ],
     outcome: "More of the right calls, from people ready to book.",
+    seoTitle: "Local SEO for Austin Home Service Companies",
+    seoDescription:
+      "Local SEO for Austin contractors: Google Business Profile setup, service-area pages, and automated reviews so homeowners find you first. Book a free call.",
+    faqs: [
+      {
+        question: "How long does local SEO take to work?",
+        answer:
+          "Fixes to your Google Business Profile and listings can show up within weeks. Rankings for competitive searches build over months as reviews and pages add up. We report on calls and leads, not just positions.",
+      },
+      {
+        question: "Do I need a storefront to show up on Google Maps?",
+        answer:
+          "No. Most home service companies are set up as service-area businesses, which hide the street address and list the areas you cover instead.",
+      },
+      {
+        question: "Why are reviews such a big deal?",
+        answer:
+          "Review count, rating, and how recent they are all affect where you show up and whether a homeowner calls. Asking after every job is the most reliable way to keep them coming.",
+      },
+    ],
   },
   {
     slug: "websites",
@@ -50,6 +75,26 @@ export const services = [
       "Fast load times and basic SEO built in",
     ],
     outcome: "Visitors who land on your site turn into leads.",
+    seoTitle: "Websites for Austin Contractors & Home Services",
+    seoDescription:
+      "Fast, mobile-first websites for Austin home service companies, with click-to-call, quote forms, reviews, and SEO built in. Turn visitors into booked jobs.",
+    faqs: [
+      {
+        question: "Do I own the website?",
+        answer:
+          "With the one-time website option, yes, outright. On a monthly plan, hosting and updates are included; we'll walk through ownership terms on the call so there are no surprises.",
+      },
+      {
+        question: "Can you redesign my current site instead of starting over?",
+        answer:
+          "Sometimes. If it's fast and easy to edit, we can add what's missing. If it's slow or built on something hard to change, rebuilding usually costs less in the long run.",
+      },
+      {
+        question: "Will the site work well on phones?",
+        answer:
+          "It's designed for phones first, because that's how most homeowners find a contractor. Click-to-call and a short quote form are always one tap away.",
+      },
+    ],
   },
   {
     slug: "lead-streamlining",
@@ -67,6 +112,26 @@ export const services = [
       "Simple reporting on where jobs come from",
     ],
     outcome: "Leads stop leaking out of the bottom of the funnel.",
+    seoTitle: "Missed-Call Text-Back & Lead Follow-Up in Austin",
+    seoDescription:
+      "Missed-call text-back, after-hours capture, and one inbox for every lead. Austin home service companies stop losing jobs to voicemail. Book a free call.",
+    faqs: [
+      {
+        question: "What is missed-call text-back?",
+        answer:
+          "When you can't pick up, the caller gets a text from your business number within seconds, so they know you saw the call and don't move on to the next company.",
+      },
+      {
+        question: "Do I have to change my phone number?",
+        answer:
+          "Usually not. We'll look at how your number is set up today and recommend the least disruptive way to add text-back and call tracking.",
+      },
+      {
+        question: "Where do leads end up?",
+        answer:
+          "In one inbox, whether they came from a call, a text, your website, or Google. You can also get them by email or text, whatever you'll actually check.",
+      },
+    ],
   },
 ] as const satisfies readonly Service[];
 

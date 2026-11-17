@@ -10,8 +10,9 @@ import { pageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Pricing",
-  description: "Simple monthly plans for Austin home service companies.",
+  title: "Pricing: Websites & Lead Systems",
+  description:
+    "Simple monthly plans and one-time website builds for Austin home service companies. No long contracts. See what's included and book a free call.",
   path: "/pricing",
 });
 

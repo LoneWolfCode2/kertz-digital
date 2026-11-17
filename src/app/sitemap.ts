@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { industries } from "@/content/industries";
 import { services } from "@/content/services";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -8,7 +9,8 @@ const routes: { path: string; priority: number }[] = [
   { path: "/services", priority: 0.9 },
   ...services.map((s) => ({ path: s.href, priority: 0.9 })),
   { path: "/pricing", priority: 0.8 },
-  { path: "/industries", priority: 0.7 },
+  { path: "/industries", priority: 0.8 },
+  ...industries.map((i) => ({ path: `/industries/${i.slug}`, priority: 0.8 })),
   { path: "/about", priority: 0.6 },
   { path: "/book", priority: 0.8 },
 ];

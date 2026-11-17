@@ -5,8 +5,8 @@ import { pageMetadata } from "@/lib/seo";
 const service = getService("lead-streamlining");
 
 export const metadata = pageMetadata({
-  title: service.label,
-  description: service.intro,
+  title: service.seoTitle,
+  description: service.seoDescription,
   path: service.href,
 });
 

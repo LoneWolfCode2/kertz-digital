@@ -7,9 +7,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Services",
+  title: "Local SEO, Websites & Lead Systems",
   description:
-    "Local visibility, websites, and lead streamlining for Austin home service companies.",
+    "Three services for Austin home service companies: get found on Google, convert visitors with a fast website, and never miss a call. Use one or all three.",
   path: "/services",
 });
 

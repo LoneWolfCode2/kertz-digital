@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
+import { MobileActionBar } from "@/components/layout/mobile-action-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { MotionProvider } from "@/components/motion/motion-provider";
@@ -32,6 +34,11 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  // Google Search Console: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the
+  // content value of the HTML-tag verification method.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
   // Off until NEXT_PUBLIC_ALLOW_INDEXING=true (see src/lib/env.ts).
   ...(!allowIndexing && { robots: { index: false, follow: false } }),
 };
@@ -59,7 +66,9 @@ export default function RootLayout({
             <SiteHeader />
             {children}
             <SiteFooter />
+            <MobileActionBar />
           </MotionProvider>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

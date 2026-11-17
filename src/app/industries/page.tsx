@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -6,9 +7,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Industries",
+  title: "Marketing for Austin Home Service Trades",
   description:
-    "Kertz Digital works with Austin HVAC, plumbing, electrical, roofing, landscaping, and pest control companies.",
+    "Websites and lead systems for Austin HVAC, plumbing, electrical, roofing, landscaping, and pest control companies. See how we help your trade.",
   path: "/industries",
 });
 
@@ -27,17 +28,21 @@ export default function IndustriesPage() {
       <section className="container-kd section-y">
         <ul className="grid border-t border-l border-border sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((industry, i) => (
-            <li
-              key={industry.label}
-              className="border-r border-b border-border p-6"
-            >
-              <p className="label-mono text-muted-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h2 className="font-display text-lg mt-2">{industry.label}</h2>
-              <p className="text-sm text-muted-foreground mt-2 text-pretty">
-                {industry.note}
-              </p>
+            <li key={industry.slug} className="border-r border-b border-border">
+              <Link
+                href={`/industries/${industry.slug}`}
+                className="group block h-full p-6 transition-colors hover:bg-card"
+              >
+                <p className="label-mono text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h2 className="font-display text-lg mt-2 group-hover:underline underline-offset-4">
+                  {industry.label} →
+                </h2>
+                <p className="text-sm text-muted-foreground mt-2 text-pretty">
+                  {industry.note}
+                </p>
+              </Link>
             </li>
           ))}
         </ul>

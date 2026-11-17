@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AnimatedNumber } from "@/components/motion/animated-number";
 import {
   calcLeak,
@@ -9,6 +9,7 @@ import {
   type LeakInputs,
   usd,
 } from "@/lib/calculator";
+import { track } from "@/lib/track";
 import { cn } from "@/lib/utils";
 import { SpecCard } from "../spec-card";
 import { buttonVariants } from "../ui/button";
@@ -135,6 +136,18 @@ export function LeakCalculator() {
   const set = (key: keyof LeakInputs) => (n: number) =>
     setInputs((prev) => ({ ...prev, [key]: n }));
   const r = calcLeak(inputs);
+  // Count the calculator as "used" the first time someone changes a value.
+  const used = useRef(false);
+  useEffect(() => {
+    if (!used.current && inputs !== DEFAULT_INPUTS) {
+      used.current = true;
+      track("calculator_used");
+    }
+  }, [inputs]);
+  const bookHref = `/book?${new URLSearchParams({
+    estimate: usd.format(r.lostPerYear),
+    from: "calculator",
+  })}`;
   return (
     <SpecCard label="Missed-lead calculator" meta="Fig. 01">
       <div className="space-y-2">
@@ -203,7 +216,7 @@ export function LeakCalculator() {
         </output>
       </div>
 
-      <Link href="/book" className={cn(buttonVariants(), "mt-6 w-full")}>
+      <Link href={bookHref} className={cn(buttonVariants(), "mt-6 w-full")}>
         Get these calls back
       </Link>
       <p className="mt-3 text-sm text-muted-foreground text-pretty">

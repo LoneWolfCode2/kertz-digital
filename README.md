@@ -24,6 +24,9 @@ npm run build    # production build
 | Pages | `src/app/**/page.tsx` |
 | SEO helpers (metadata, structured data) | `src/lib/seo.ts`, `src/lib/schema.ts` |
 | Site URL + indexing switch | `src/lib/env.ts` |
+| Industry landing pages (copy, FAQs) | `src/content/industries.ts` |
+| Booking form + lead delivery (email, bot webhook) | `src/components/booking-form.tsx`, `src/lib/leads.ts` |
+| Analytics + conversion events | `src/components/analytics.tsx`, `src/lib/track.ts` |
 
 Placeholders are written as `[LIKE THIS]`; search for `[` to find them.
 
@@ -49,6 +52,13 @@ these on the **Production** environment and redeploy:
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `true` |
 
 Preview deployments are never indexed. See `.env.example`.
+
+### Booking form delivery
+
+The `/book` form sends each lead by email (Resend) and/or to a signed webhook
+for the communications bot. Set `RESEND_API_KEY` + `LEAD_EMAIL_TO`, or
+`COMMS_WEBHOOK_URL` + `COMMS_WEBHOOK_SECRET`, on Production. With neither set,
+the form tells visitors to call instead, so no lead is silently dropped.
 
 ### Attaching the real domain
 

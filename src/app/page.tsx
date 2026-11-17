@@ -1,9 +1,38 @@
 import { RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
+import { FaqSection } from "@/components/sections/faq";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { LeakCalculator } from "@/components/sections/leak-calculator";
 import { WhoItsFor } from "@/components/sections/who-its-for";
 import { pageMetadata } from "@/lib/seo";
+
+const faqs = [
+  {
+    question: "Who is Kertz Digital for?",
+    answer:
+      "Home service companies in the Austin area: HVAC, plumbing, electrical, roofing, landscaping, pest control, and similar trades that depend on the phone ringing.",
+  },
+  {
+    question: "What does it cost?",
+    answer:
+      "There are monthly plans and a one-time website option. See the pricing page for what each includes, or book a call and we'll tell you which piece would pay off first for your business.",
+  },
+  {
+    question: "Am I locked into a long contract?",
+    answer:
+      "No. Monthly plans have no long-term contract. We keep clients by producing booked jobs, not paperwork.",
+  },
+  {
+    question: "What happens on the free call?",
+    answer:
+      "Twenty minutes. We look at how leads reach you today, where they're slipping, and what we'd fix first. No pitch deck, and no obligation.",
+  },
+  {
+    question: "Do you only work in Austin?",
+    answer:
+      "We focus on Austin and nearby cities like Round Rock, Cedar Park, Pflugerville, Georgetown, and Leander, because knowing the local market is part of what makes the work effective.",
+  },
+];
 
 export const metadata = pageMetadata({
   title: "Austin Home Service Websites & Lead Systems | Kertz Digital",
@@ -24,7 +53,7 @@ export default function Home() {
         >
           <div className="lg:col-span-7">
             <RevealItem as="p" className="label-mono text-muted-foreground">
-              01 / Never miss a call
+              Austin websites + lead systems for home services
             </RevealItem>
             <RevealItem
               as="h1"
@@ -51,6 +80,7 @@ export default function Home() {
 
       <HowItWorks />
       <WhoItsFor />
+      <FaqSection faqs={faqs} />
       <CtaBand />
     </main>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { industries } from "@/content/industries";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -53,7 +54,22 @@ export function SiteFooter() {
         </nav>
 
         <div className="lg:col-span-3">
-          <p className="label-mono text-muted-foreground">Serving</p>
+          <nav aria-label="Industries">
+            <p className="label-mono text-muted-foreground">Industries</p>
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+              {industries.map((i) => (
+                <li key={i.slug}>
+                  <Link
+                    href={`/industries/${i.slug}`}
+                    className="hover:underline"
+                  >
+                    {i.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <p className="label-mono mt-8 text-muted-foreground">Serving</p>
           <p className="mt-4 text-sm text-muted-foreground text-pretty">
             {site.serviceArea.join(" · ")}
           </p>

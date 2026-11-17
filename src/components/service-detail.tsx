@@ -2,6 +2,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
+import { FaqSection } from "@/components/sections/faq";
 import { SpecCard } from "@/components/spec-card";
 import { buttonVariants } from "@/components/ui/button";
 import { type Service, services } from "@/content/services";
@@ -73,6 +74,11 @@ export function ServiceDetail({ service }: { service: Service }) {
           ))}
         </ul>
       </section>
+
+      <FaqSection
+        faqs={service.faqs}
+        title={`${service.label}: common questions`}
+      />
 
       <CtaBand />
     </main>
