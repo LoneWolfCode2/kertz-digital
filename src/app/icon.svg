@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Kertz Digital</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .d { stroke: #f6f4ee; stroke-width: 3; }
+    }
+  </style>
+  <path class="d" fill="#0e2a47" d="M6 4H30C49 4 60 16 60 32S49 60 30 60H6Z"/>
+  <g fill="#ffd60a">
+    <path d="M17 15H25V49H17Z"/>
+    <path d="M25 27.5 37 15H47.5L25 38.5Z"/>
+    <path d="M30.5 32.5 47.5 49H37L25 37.5Z"/>
+  </g>
+</svg>
