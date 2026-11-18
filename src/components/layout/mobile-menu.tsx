@@ -38,35 +38,40 @@ export function MobileMenu() {
         </SheetHeader>
 
         <nav aria-label="Mobile" className="flex-1 overflow-y-auto p-6">
-          <p className="label-mono text-muted-foreground">Services</p>
-          <ul className="mt-3 divide-y divide-border border-y border-border">
-            {site.services.map((s) => (
-              <li key={s.href}>
-                <Link href={s.href} onClick={close} className="block py-4">
-                  <span className="block font-semibold">{s.label}</span>
-                  <span className="block text-sm text-muted-foreground">
-                    {s.blurb}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <ul className="mt-8">
-            {site.nav
-              .filter((item) => item.href !== "/services")
-              .map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={close}
-                    className="block py-3 text-lg font-medium"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-          </ul>
+          {site.nav.map((item) =>
+            item.children ? (
+              <div key={item.label} className="mb-8">
+                <p className="label-mono text-muted-foreground">{item.label}</p>
+                <ul className="mt-3 divide-y divide-border border-y border-border">
+                  {item.children.map((c) => (
+                    <li key={`${c.href}-${c.label}`}>
+                      <Link
+                        href={c.href}
+                        onClick={close}
+                        className="block py-3"
+                      >
+                        <span className="block font-semibold">{c.label}</span>
+                        {c.blurb && (
+                          <span className="block text-sm text-muted-foreground">
+                            {c.blurb}
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={close}
+                className="block py-3 text-lg font-medium"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="space-y-3 border-t border-border p-6">

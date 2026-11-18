@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DesktopNav } from "@/components/layout/desktop-nav";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
@@ -18,20 +19,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-8">
-            {site.nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="whitespace-nowrap text-sm font-medium underline-offset-8 decoration-2 hover:underline"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <DesktopNav items={site.nav} />
 
         <div className="flex shrink-0 items-center gap-3">
           <a

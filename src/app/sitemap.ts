@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { industries } from "@/content/industries";
 import { services } from "@/content/services";
+import { toolHref, tools } from "@/content/tools";
 import { absoluteUrl } from "@/lib/seo";
 
 // Add new public routes here so search engines can find them.
@@ -13,6 +14,10 @@ const routes: { path: string; priority: number }[] = [
   { path: "/pricing", priority: 0.8 },
   { path: "/industries", priority: 0.8 },
   ...industries.map((i) => ({ path: `/industries/${i.slug}`, priority: 0.8 })),
+  { path: "/tools", priority: 0.7 },
+  ...tools
+    .filter((t) => !t.soon)
+    .map((t) => ({ path: toolHref(t.slug), priority: 0.7 })),
   { path: "/directory", priority: 0.7 },
   { path: "/directory/list-your-business", priority: 0.5 },
   { path: "/about", priority: 0.6 },

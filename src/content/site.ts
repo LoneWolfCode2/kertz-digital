@@ -13,7 +13,11 @@
 // structured data so Google never sees fake details.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { industries } from "./industries";
 import { services } from "./services";
+
+export type NavLink = { label: string; href: string; blurb?: string };
+export type NavItem = NavLink & { children?: NavLink[] };
 
 export const site = {
   name: "Kertz Digital",
@@ -60,11 +64,59 @@ export const site = {
   description:
     "Kertz Digital builds websites and lead systems for Austin home service companies, so every call, form, and after-hours inquiry becomes a booked job.",
   services: services.map(({ label, href, blurb }) => ({ label, href, blurb })),
+  /**
+   * Main menu. Items with `children` open as dropdowns on desktop and as
+   * grouped sections in the mobile menu.
+   */
   nav: [
-    { label: "Services", href: "/services" },
-    { label: "Industries", href: "/industries" },
+    {
+      label: "Services",
+      href: "/services",
+      children: [
+        ...services.map(({ label, href, blurb }) => ({ label, href, blurb })),
+        { label: "All services", href: "/services" },
+      ],
+    },
+    {
+      label: "Industries",
+      href: "/industries",
+      children: [
+        ...industries.map((i) => ({
+          label: i.label,
+          href: `/industries/${i.slug}`,
+        })),
+        { label: "All industries", href: "/industries" },
+      ],
+    },
     { label: "Pricing", href: "/pricing" },
-    { label: "Directory", href: "/directory" },
+    {
+      label: "Resources",
+      href: "/tools",
+      children: [
+        {
+          label: "Free tools",
+          href: "/tools",
+          blurb: "Quick checks that show where jobs slip away.",
+        },
+        {
+          label: "Trades directory",
+          href: "/directory",
+          blurb: "Local home service businesses you can call today.",
+        },
+        {
+          label: "List your business",
+          href: "/directory/list-your-business",
+          blurb: "Get your business in the directory, free.",
+        },
+      ],
+    },
+    { label: "About", href: "/about" },
+  ] as NavItem[],
+  /** Footer "Company" column. */
+  companyLinks: [
+    { label: "Pricing", href: "/pricing" },
+    { label: "Free tools", href: "/tools" },
+    { label: "Trades directory", href: "/directory" },
     { label: "About", href: "/about" },
   ],
   cta: { label: "Book a call", href: "/book" },

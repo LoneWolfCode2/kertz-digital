@@ -41,15 +41,13 @@ export function SiteFooter() {
         <nav aria-label="Company" className="lg:col-span-2">
           <p className="label-mono text-muted-foreground">Company</p>
           <ul className="mt-4 space-y-2 text-sm">
-            {[...site.nav.filter((n) => n.href !== "/services"), site.cta].map(
-              (n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="hover:underline">
-                    {n.label}
-                  </Link>
-                </li>
-              ),
-            )}
+            {[...site.companyLinks, site.cta].map((n) => (
+              <li key={n.href}>
+                <Link href={n.href} className="hover:underline">
+                  {n.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
