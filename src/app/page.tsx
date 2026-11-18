@@ -15,7 +15,7 @@ const faqs = [
   {
     question: "What does it cost?",
     answer:
-      "There are monthly plans and a one-time website option. See the pricing page for what each includes, or book a call and we'll tell you which piece would pay off first for your business.",
+      "Monthly plans start at $397/month, and the full Booked system is $797/month plus a one-time setup. A standalone website is $3,500. See the pricing page for details, or book a call and we'll tell you which piece would pay off first for your business.",
   },
   {
     question: "Am I locked into a long contract?",

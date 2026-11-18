@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { FoundingBanner } from "@/components/founding-banner";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
 import { buttonVariants } from "@/components/ui/button";
-import { plans } from "@/content/plans";
+import { foundingOffer, plans, pricingSmallPrint } from "@/content/plans";
 import { site } from "@/content/site";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
@@ -12,7 +13,7 @@ import { cn } from "@/lib/utils";
 export const metadata = pageMetadata({
   title: "Pricing: Websites & Lead Systems",
   description:
-    "Simple monthly plans and one-time website builds for Austin home service companies. No long contracts. See what's included and book a free call.",
+    "Plans from $397/month, or a $3,500 website you own. Lead systems for Austin home service companies, month-to-month with no long contract. Book a free call.",
   path: "/pricing",
 });
 
@@ -29,6 +30,7 @@ export default function PricingPage() {
       />
 
       <section className="container-kd section-y">
+        <FoundingBanner />
         <ul className="grid gap-8 lg:grid-cols-3">
           {plans.map((plan) => (
             <li
@@ -54,6 +56,16 @@ export default function PricingPage() {
                   {plan.cadence}
                 </span>
               </p>
+              {plan.priceNote && (
+                <p className="mt-1 font-mono text-sm text-muted-foreground">
+                  {plan.priceNote}
+                </p>
+              )}
+              {foundingOffer.enabled && (
+                <p className="mt-3 self-start bg-caution px-2 py-0.5 font-mono text-sm text-caution-foreground">
+                  {foundingOffer.rates[plan.name]}
+                </p>
+              )}
               <p className="mt-4 text-sm text-muted-foreground text-pretty">
                 {plan.summary}
               </p>
@@ -82,6 +94,9 @@ export default function PricingPage() {
             </li>
           ))}
         </ul>
+        <p className="mt-10 max-w-[70ch] text-sm text-muted-foreground text-pretty">
+          {pricingSmallPrint}
+        </p>
       </section>
 
       <CtaBand />
