@@ -3,7 +3,8 @@
 // To add a business, add one row to that file (Excel or Google Sheets work;
 // download as CSV). Columns, in order:
 //   name, trade, phone, website, google_url, cities, description, services, hours
-// - trade: one of the industry labels in src/content/industries.ts
+// - trade: one of the industry labels in src/content/industries.ts; a
+//   business in several trades lists them with semicolons (HVAC;Plumbing)
 // - cities, services: separate items with semicolons
 // Every row is checked at build time. A bad row stops the build with the row
 // number and the problem, so a typo never ships as a broken listing.
@@ -32,8 +33,8 @@ export const COLUMNS = [
 export type Listing = {
   slug: string;
   name: string;
-  trade: string;
-  tradeSlug: string;
+  /** Industry labels, e.g. ["HVAC", "Plumbing"]. */
+  trades: string[];
   phone: string;
   phoneHref: string;
   website?: string;
@@ -96,10 +97,14 @@ const rowSchema = z.object({
   name: z.string().trim().min(2, "name is missing").max(100),
   trade: z
     .string()
-    .trim()
-    .refine((v) => industries.some((i) => i.label === v), {
-      message: `trade must be one of: ${industries.map((i) => i.label).join(", ")}`,
-    }),
+    .refine(
+      (v) =>
+        list(v).length > 0 &&
+        list(v).every((t) => industries.some((i) => i.label === t)),
+      {
+        message: `trade must be one or more of: ${industries.map((i) => i.label).join(", ")} (separate several with ;)`,
+      },
+    ),
   phone: z
     .string()
     .trim()
@@ -167,12 +172,10 @@ export function toListings(text: string): Listing[] {
       throw new Error(`directory.csv row ${line}: "${r.name}" is listed twice`);
     }
     seen.add(slug);
-    const industry = industries.find((x) => x.label === r.trade);
     return {
       slug,
       name: r.name,
-      trade: r.trade,
-      tradeSlug: industry?.slug ?? slugify(r.trade),
+      trades: list(r.trade),
       ...formatPhone(r.phone),
       website: r.website || undefined,
       googleUrl: r.google_url || undefined,
@@ -189,6 +192,7 @@ export async function getListings(): Promise<Listing[]> {
   cacheLife("max");
   const listings = toListings(await readFile(CSV_PATH, "utf8"));
   return listings.sort(
-    (a, b) => a.trade.localeCompare(b.trade) || a.name.localeCompare(b.name),
+    (a, b) =>
+      a.trades[0].localeCompare(b.trades[0]) || a.name.localeCompare(b.name),
   );
 }

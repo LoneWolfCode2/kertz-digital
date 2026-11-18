@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Austin Trades Directory: Local Home Service Businesses",
   description:
-    "Find independent Austin-area HVAC, plumbing, electrical, roofing, landscaping, and pest control businesses. Free to use, free to be listed.",
+    "Find local Austin-area HVAC, plumbing, electrical, roofing, landscaping, and pest control businesses. Free to use, free to be listed.",
   path: "/directory",
 });
 
@@ -20,7 +20,7 @@ export default async function DirectoryPage() {
   const listings = await getListings();
   const trades = industries
     .map((i) => i.label)
-    .filter((t) => listings.some((l) => l.trade === t));
+    .filter((t) => listings.some((l) => l.trades.includes(t)));
 
   return (
     <main>
@@ -30,7 +30,7 @@ export default async function DirectoryPage() {
       <PageHeader
         eyebrow="Austin trades directory"
         title="Local trades you can call today."
-        lead="Independent Austin-area home service businesses in one place. Free to search, free to be listed."
+        lead="Austin-area home service businesses in one place. Free to search, free to be listed."
       />
 
       <section className="container-kd section-y grid gap-12 lg:grid-cols-12">

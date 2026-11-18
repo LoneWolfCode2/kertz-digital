@@ -29,10 +29,10 @@ export function DirectoryBrowser({
     const q = query.trim().toLowerCase();
     return listings.filter(
       (l) =>
-        (!trade || l.trade === trade) &&
+        (!trade || l.trades.includes(trade)) &&
         (!city || l.cities.includes(city)) &&
         (!q ||
-          [l.name, l.trade, l.description ?? "", ...l.services]
+          [l.name, ...l.trades, l.description ?? "", ...l.services]
             .join(" ")
             .toLowerCase()
             .includes(q)),
@@ -106,7 +106,9 @@ export function DirectoryBrowser({
               key={l.slug}
               className="flex min-w-0 flex-col gap-3 border border-border bg-card p-6"
             >
-              <p className="label-mono text-muted-foreground">{l.trade}</p>
+              <p className="label-mono text-muted-foreground">
+                {l.trades.join(" · ")}
+              </p>
               <h2 className="font-display text-lg">{l.name}</h2>
               {l.description && (
                 <p className="text-sm text-muted-foreground text-pretty">

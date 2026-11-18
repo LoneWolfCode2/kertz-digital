@@ -64,6 +64,7 @@ export const site = {
     { label: "Services", href: "/services" },
     { label: "Industries", href: "/industries" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Directory", href: "/directory" },
     { label: "About", href: "/about" },
   ],
   cta: { label: "Book a call", href: "/book" },

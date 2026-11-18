@@ -38,7 +38,7 @@ export default function ListYourBusinessPage() {
       <PageHeader
         eyebrow="Austin trades directory"
         title="List your business, free."
-        lead="For independent home service businesses in the Austin area. Already listed? Use the same form to update or remove your listing."
+        lead="For home service businesses in the Austin area. Already listed? Use the same form to update or remove your listing."
       />
 
       <section className="container-kd section-y grid gap-12 lg:grid-cols-12">
