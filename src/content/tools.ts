@@ -37,9 +37,8 @@ export const tools: Tool[] = [
     slug: "busy-season-calendar",
     title: "Austin busy-season calendar",
     blurb:
-      "When calls peak for each trade, month by month, so you can plan reviews and offers ahead of the rush.",
+      "When Austin homeowners search for each trade, month by month, from Google search data. Plan reviews and offers before the rush.",
     time: "Reference",
-    soon: true,
   },
 ];
 
