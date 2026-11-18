@@ -120,7 +120,7 @@ function emailBody(e: LeadEnvelope) {
   return { text, html };
 }
 
-async function sendEmail(e: LeadEnvelope): Promise<boolean> {
+async function sendEmail(e: LeadEnvelope, subject?: string): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_EMAIL_TO;
   if (!key || !to) return false;
@@ -138,7 +138,7 @@ async function sendEmail(e: LeadEnvelope): Promise<boolean> {
       from,
       to: to.split(",").map((s) => s.trim()),
       ...(e.lead.email && { reply_to: e.lead.email }),
-      subject: `New lead: ${e.lead.name} (${e.lead.trade})`,
+      subject: subject ?? `New lead: ${e.lead.name} (${e.lead.trade})`,
       text,
       html,
     }),
@@ -175,10 +175,19 @@ async function sendWebhook(e: LeadEnvelope): Promise<boolean> {
   return res.ok;
 }
 
-/** Returns true if at least one channel accepted the lead. */
-export async function deliverLead(lead: Lead): Promise<boolean> {
+/**
+ * Returns true if at least one channel accepted the lead.
+ * `subject` overrides the email subject (e.g. for directory requests).
+ */
+export async function deliverLead(
+  lead: Lead,
+  opts: { subject?: string } = {},
+): Promise<boolean> {
   const e = envelope(lead);
-  const results = await Promise.allSettled([sendEmail(e), sendWebhook(e)]);
+  const results = await Promise.allSettled([
+    sendEmail(e, opts.subject),
+    sendWebhook(e),
+  ]);
   for (const r of results) {
     if (r.status === "rejected") console.error("[leads]", r.reason);
   }

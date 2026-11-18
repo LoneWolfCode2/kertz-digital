@@ -13,6 +13,8 @@ const routes: { path: string; priority: number }[] = [
   { path: "/pricing", priority: 0.8 },
   { path: "/industries", priority: 0.8 },
   ...industries.map((i) => ({ path: `/industries/${i.slug}`, priority: 0.8 })),
+  { path: "/directory", priority: 0.7 },
+  { path: "/directory/list-your-business", priority: 0.5 },
   { path: "/about", priority: 0.6 },
   { path: "/book", priority: 0.8 },
 ];

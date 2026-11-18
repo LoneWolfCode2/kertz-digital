@@ -11,6 +11,7 @@ export type ConversionEvent =
   | "lead_form_error"
   | "lead_created"
   | "calculator_used"
+  | "directory_request_sent"
   | "schedule_submit"
   | "schedule_error"
   | "appointment_booked";
