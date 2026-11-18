@@ -51,8 +51,9 @@ export const site = {
     smsProgram: "Kertz Digital Customer Care",
   },
   hours: {
-    display: "Mon–Fri, 8am–6pm",
-    placeholder: true, // [BUSINESS HOURS NEEDED]
+    /** Joseph's live hours. Leads by form, text, or voicemail are taken any time. */
+    display: "Weekdays after 6pm · Weekends by appointment",
+    placeholder: false,
   },
   tagline: "Websites and lead systems for Austin home service companies.",
   /** Default meta description for pages that don't set their own. */
